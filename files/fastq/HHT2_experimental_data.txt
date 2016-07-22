@@ -1,0 +1,10 @@
+!
+!Date: 07/20/2016
+!From: Saccharomyces Genome Database (SGD) 
+!URL: http://www.yeastgenome.org/ 
+!Contact Email: sgd-helpdesk@lists.stanford.edu 
+!Funding: NHGRI at US NIH, grant number 5-P41-HG001315 
+!
+
+Gene	Gene Systematic Name	Experiment	Result	Reference
+HHT2	YNL031C	protein abundance	248000 molecules/cell	Ghaemmaghami S, et al. (2003)
