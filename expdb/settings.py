@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+from config import DB
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -77,10 +78,10 @@ WSGI_APPLICATION = 'expdb.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'expdb',
-        'HOST': 'localhost',
-        'USER': 'nirf_lab',
-        'PASSWORD': ''
+        'NAME': DB['name'],
+        'HOST': DB['host'],
+        'USER': DB['user'],
+        'PASSWORD': DB['password']
     }
 }
 

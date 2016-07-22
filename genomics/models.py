@@ -1,10 +1,11 @@
 from __future__ import unicode_literals
 
+from expdb.config import FILE_PATH
 from django.db import models
 from django.core.files.storage import FileSystemStorage
 from django.utils.encoding import python_2_unicode_compatible
 
-fss = FileSystemStorage(location='/Users/user/Dropbox/workspace/expdb/files/')
+fss = FileSystemStorage(location=FILE_PATH)
 
 
 @python_2_unicode_compatible
