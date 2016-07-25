@@ -1,0 +1,12 @@
+by, Alon
+on, 11/11/1945
+description,this is an example
+publication url
+data url
+
+samples:
+protocol,genotype,time [num|min],medium [str],sequencing date, fastq path
+Mnase-truseq,by4741,17,YPD,19/4/2013,mnase/b4.fastq.gz
+5p-seq,by4741,24,YPD,20/4/2013,5p/a4.fastq.gz
+5p-seq,by4741,17,YPD-GAL,20/4/2013,5p/a7.fastq.gz
+end

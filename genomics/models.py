@@ -5,6 +5,7 @@ from django.db import models
 from django.core.files.storage import FileSystemStorage
 from django.utils.encoding import python_2_unicode_compatible
 
+
 fss = FileSystemStorage(location=FILE_PATH)
 
 
@@ -12,7 +13,8 @@ fss = FileSystemStorage(location=FILE_PATH)
 class Member(models.Model):
     name = models.CharField(max_length=60)
 
-    def __str__(self): return self.name
+    def __str__(self):
+        return self.name
 
 
 class ModelWithFile(models.Model): pass
@@ -23,7 +25,8 @@ class Genotype(ModelWithFile):
     short_name = models.CharField(max_length=60)
     string = models.TextField(help_text='string describing the complete genotype unambiguously')
 
-    def __str__(self): return self.short_name
+    def __str__(self):
+        return self.short_name
 
 
 @python_2_unicode_compatible
@@ -32,7 +35,8 @@ class Protocol(ModelWithFile):
     description = models.TextField(max_length=2000)
     pub_url = models.URLField(help_text='if published, link to protocol', blank=True, verbose_name='publication url')
 
-    def __str__(self): return self.short_name
+    def __str__(self):
+        return self.short_name
 
 
 @python_2_unicode_compatible
@@ -46,7 +50,8 @@ class Variable(models.Model):
     units = models.CharField(max_length=100)
     samples = models.ManyToManyField('Sample', through='Value')
 
-    def __str__(self): return '%s [%s]' % (self.name, self.units)
+    def __str__(self):
+        return '%s [%s]' % (self.name, self.units)
 
 
 @python_2_unicode_compatible
@@ -56,7 +61,8 @@ class File(models.Model):
     file = models.FileField(storage=fss, upload_to='meta/')
     description = models.TextField(max_length=2000, blank=True)
 
-    def __str__(self): return self.file.name
+    def __str__(self):
+        return self.file.name
 
 
 @python_2_unicode_compatible
@@ -67,7 +73,7 @@ class Experiment(ModelWithFile):
     description = models.TextField(max_length=2000)
     pub_url = models.URLField(help_text='if published, link to publication', blank=True, verbose_name='publication url')
     data_url = models.URLField(help_text='if data is published, link to data repository entry', blank=True)
-    variables = models.ManyToManyField(Variable)
+    variables = models.ManyToManyField(Variable, blank=True)
 
     # @property
     def n_samples(self):
@@ -87,7 +93,8 @@ class Sample(models.Model):
     protocol = models.ForeignKey(Protocol, on_delete=models.PROTECT, related_name='samples')
     variables = models.ManyToManyField(Variable, through='Value')
 
-    def __str__(self): return '%s: %s' % (str(self.experiment), str(id(self)))
+    def __str__(self):
+        return '%s: %s' % (str(self.experiment), str(id(self)))
 
 
 @python_2_unicode_compatible
@@ -96,7 +103,8 @@ class Value(models.Model):
     sample = models.ForeignKey(Sample, on_delete=models.CASCADE)
     string_value = models.CharField(max_length=100)
 
-    def __str__(self): return self.string_value
+    def __str__(self):
+        return self.string_value
 
     def _value(self):
         if self.var.type == Variable.INT:
@@ -114,7 +122,8 @@ class TrackType(models.Model):
     format_description = models.TextField(help_text='either a text explaining the format, '
                                                     'or a link to such an explanation')
 
-    def __str__(self): return self.name
+    def __str__(self):
+        return self.name
 
 
 @python_2_unicode_compatible
@@ -128,4 +137,5 @@ class Track(models.Model):
                                                   'sample fastq, with all relevant programs, versions, parameters, '
                                                   'etc.'))
 
-    def __str__(self): return self.name
+    def __str__(self):
+        return self.name

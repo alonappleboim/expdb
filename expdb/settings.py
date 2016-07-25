@@ -27,11 +27,14 @@ SECRET_KEY = '74ljp&b(3u+1-t7y7&kv1%@*9i98fd05p2hopff_ox9u9s!bap'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+pdir = os.path.sep.join(os.path.abspath(__file__).split(os.path.sep)[:-2])
+PROJECT_ROOT = os.path.dirname(pdir)
+STATIC_ROOT = os.path.join(pdir, 'static')
 
 # Application definition
 
 INSTALLED_APPS = [
+    # 'grappelli',
     'genomics.apps.GenomicsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -65,6 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # 'django.core.context_processors.request',
             ],
         },
     },

@@ -84,7 +84,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='Experiment',
+            name='experiment',
             fields=[
                 ('modelwithfile_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='genomics.ModelWithFile')),
                 ('performed_on', models.DateField(help_text='the date on which experiment was perfomed', verbose_name='on')),
@@ -139,7 +139,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='sample',
             name='experiment',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='samples', to='genomics.Experiment'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='samples', to='genomics.experiment'),
         ),
         migrations.AddField(
             model_name='sample',

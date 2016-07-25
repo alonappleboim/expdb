@@ -1,5 +1,14 @@
+from models import Experiment
 from django import forms
 
 
-class UploadExperimentForm(forms.Form):
-    experiment_file = forms.FileField()
+class ContactForm1(forms.Form):
+    subject = forms.CharField(max_length=100)
+    sender = forms.EmailField()
+
+class ContactForm2(forms.Form):
+    message = forms.CharField(widget=forms.Textarea)
+
+
+class UploadSamplesForm(forms.Form):
+    samples_file = forms.FileField()

@@ -1,5 +1,8 @@
 from django.contrib import admin
 from django import forms
+from django.shortcuts import render_to_response
+from django.views.decorators.cache import never_cache
+
 # Register your models here.
 
 from .models import *
@@ -21,14 +24,6 @@ class TabularFile(admin.TabularInline):
     extra = 1
 
 
-# class ExperimentForm(forms.ModelForm):
-#     samples_file = forms.FileField()
-#
-#     class Meta:
-#         model = Experiment
-#         fields = '__all__'
-
-
 class ExperimentAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
@@ -43,11 +38,19 @@ class ExperimentAdmin(admin.ModelAdmin):
         }),
     )
 
+    # def add_samples_url(self, obj):
+    #     return '<a href=/genomics/add_samples:%s>add samples</a>' % obj.pk
+
     list_display = ('title', 'performed_by', 'performed_on', 'n_samples')
     inlines = [TabularFile, TabularSample]
+    readonly_fields = ['samples',]
     filter_horizontal = ('variables',)
     formfield_overrides = {models.TextField: {'widget': forms.Textarea(attrs={'rows': 6, 'cols': 100})}}
     list_filter = ('performed_by', 'performed_on', 'variables')
+
+
+    # def add_view(self, request, form_url='', extra_context=None):
+    #     return super(ExperimentAdmin, self).add_view(request, form_url=form_url, extra_context=extra_context)
 
 
 class ModelWithFileAdmin(admin.ModelAdmin):
@@ -69,8 +72,12 @@ class VariableAdmin(admin.ModelAdmin):
 class ValueAdmin(admin.ModelAdmin):
     fields = (('sample', 'var'), 'string_value')
 
+class FileAdmin(admin.ModelAdmin):
+    pass
 
+admin.site.site_header = 'ExpDB'
 admin.site.register(Value, ValueAdmin)
+admin.site.register(File, FileAdmin)
 admin.site.register(Experiment, ExperimentAdmin)
 admin.site.register(Genotype, ModelWithFileAdmin)
 admin.site.register(Protocol, ModelWithFileAdmin)
